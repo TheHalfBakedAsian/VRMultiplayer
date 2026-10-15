@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using XRMultiplayer;
+[RequireComponent(typeof(XRGrabInteractable))]
 [RequireComponent(typeof(ClientNetworkTransform))]
 [RequireComponent(typeof(NetworkPhysicsInteractable))]
 [RequireComponent(typeof(NetworkObject))]
-[RequireComponent(typeof(XRGrabInteractable))]
 [RequireComponent(typeof(NetworkRigidbody))]
 public class NetworkGrab : MonoBehaviour
 {
