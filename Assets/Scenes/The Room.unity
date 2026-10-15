@@ -12949,7 +12949,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7174019212652907435, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 654448619}
   m_SourcePrefab: {fileID: 100100000, guid: 77ac6b10722bcca4a8baf70e44d89e78, type: 3}
 --- !u!114 &649466644 stripped
 MonoBehaviour:
@@ -13117,6 +13121,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1387731895}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &654448610 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7174019212652907435, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+    type: 3}
+  m_PrefabInstance: {fileID: 649466643}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &654448619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654448610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf296fc962d7184ab14ad1841598d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.ActionBasedContinuousMoveProvider
+  m_Mediator: {fileID: 1124622200}
+  m_TransformationPriority: 0
+  m_MoveSpeed: 1
+  m_EnableStrafe: 1
+  m_EnableFly: 0
+  m_UseGravity: 1
+  m_GravityApplicationMode: 0
+  m_ForwardSource: {fileID: 649466646}
+  m_LeftHandMoveAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Left Hand Move
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 743aee75-e819-4e05-933c-736c20f2c40b
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: 8c865e01-f024-4f05-b2f8-f1080eb73503
+        m_Path: <XRController>{LeftHand}/thumbstick
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Left Hand Move
+        m_Flags: 0
+      m_Flags: 0
+    m_Reference: {fileID: 0}
+  m_RightHandMoveAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Right Hand Move
+      m_Type: 0
+      m_ExpectedControlType: Vector2
+      m_Id: 5a7f8123-be1a-41fa-9768-67fd6c683e2f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!1 &680523064
 GameObject:
   m_ObjectHideFlags: 0
@@ -14938,7 +15000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Id: 094023fd-6a0f-491e-b88d-89fb5ccdddd4
---- !u!21 &751361577
+--- !u!21 &730414701
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
@@ -24133,6 +24195,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb2634bc080f541a6815f1b96da5bdfa, type: 3}
+--- !u!114 &1124622200 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2917872609362357213, guid: 77ac6b10722bcca4a8baf70e44d89e78,
+    type: 3}
+  m_PrefabInstance: {fileID: 649466643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa7b4195685c3846be746c74f0ab2f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1174053564
 GameObject:
   m_ObjectHideFlags: 0
