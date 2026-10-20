@@ -31,7 +31,8 @@ public class NetworkPlayVideo : NetworkBehaviour
 
     private void Awake()
     {
-        Paused.OnValueChanged += VideoFeedClientRpc;
+        GetComponent<NetworkObject>().RemoveOwnership();
+        Paused.OnValueChanged += OnPausedChanged;
         meshRenderer = GetComponent<MeshRenderer>();
         videoPlayer = GetComponent<VideoPlayer>();
 
@@ -40,39 +41,46 @@ public class NetworkPlayVideo : NetworkBehaviour
 
         offMaterial = meshRenderer.material;
     }
-    public void flipPaused()
+    public void requestFlip()
+    {
+        agonyRpc();
+    }
+    [Rpc(SendTo.Server)]
+    public void flipPausedRpc()
     {
         Paused.Value = !Paused.Value;
     }
+    [Rpc(SendTo.Server)]
+    private void agonyRpc()
+    {
+        VideoFeedRpc();
+    }
     private void OnPausedChanged(bool previousValue, bool newValue)
     {
-        if (!Paused.Value) {
-            ApplyVideoMaterial(videoPlayer);
-            videoPlayer.Play(); 
-        }
-        else {
-            meshRenderer.material = offMaterial;
-            videoPlayer.Stop();
-        }
+        VideoFeedRpc();
     }
     private void ApplyVideoMaterial(VideoPlayer source)
     {
         meshRenderer.material = videoMaterial;
         videoMaterial.color = Color.white; // allows video to be displayed - black material hides video
     }
-
-    [ClientRpc]
-    private void VideoFeedClientRpc(bool previousValue, bool newValue)
+    private void ApplyOffMaterial()
     {
-        if (!Paused.Value)
+        meshRenderer.material = offMaterial;
+    }
+
+    [Rpc(SendTo.ClientsAndHost)]
+    private void VideoFeedRpc()
+    {
+        if (!videoPlayer.isPlaying)
         {
             ApplyVideoMaterial(videoPlayer);
             videoPlayer.Play();
         }
         else
         {
-            meshRenderer.material = offMaterial;
-            videoPlayer.Stop();
+            ApplyOffMaterial();
+            videoPlayer.Pause();
         }
     }
     private void OnValidate()
@@ -84,5 +92,14 @@ public class NetworkPlayVideo : NetworkBehaviour
 
         if (TryGetComponent(out VideoPlayer videoPlayer))
             videoPlayer.targetMaterialProperty = "_BaseMap";
+    }
+    private void OnEnable()
+    {
+        videoPlayer.prepareCompleted += ApplyVideoMaterial;
+    }
+
+    private void OnDisable()
+    {
+        videoPlayer.prepareCompleted -= ApplyVideoMaterial;
     }
 }
