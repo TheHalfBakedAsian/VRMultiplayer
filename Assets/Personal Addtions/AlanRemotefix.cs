@@ -7,7 +7,8 @@ public class AlanRemotefix : MonoBehaviour
     {
         if(videoPlayer != null)
         {
-            videoPlayer.RequestPlay();
+            Debug.Log("attempt play/pause");
+            videoPlayer.RequestPlayRpc();
         }
         else
         {

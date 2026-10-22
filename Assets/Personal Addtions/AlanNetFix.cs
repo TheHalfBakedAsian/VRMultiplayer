@@ -10,9 +10,16 @@ public class AlanNetFix : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         if(videoPlayer == null) { videoPlayer = GetComponent<VideoPlayer>(); }
-        if (clip == null && videoPlayer != null)
+        if (clip != null && videoPlayer != null)
         {
             videoPlayer.clip = clip;
+            videoPlayer.waitForFirstFrame = true;
+            videoPlayer.sendFrameReadyEvents = true;
+            videoPlayer.frameReady += (vp, frame) =>
+            {
+                if (frame < 10)
+                    Debug.Log($"Frame {frame}");
+            };
         }
         if (videoPlayer != null)
         {
@@ -21,7 +28,8 @@ public class AlanNetFix : NetworkBehaviour
 
         base.OnNetworkSpawn();
     }
-    public void RequestPlay()
+    [Rpc(SendTo.Server)]
+    public void RequestPlayRpc()
     {
         if (!IsSpawned)
         {
@@ -32,23 +40,21 @@ public class AlanNetFix : NetworkBehaviour
     [Rpc(SendTo.ClientsAndHost)]
     private void PlayVideoRpc()
     {
-        if (!videoPlayer.isPlaying)
-        {
-
-            if (videoPlayer == null)
+        if (videoPlayer == null)
             {
                Debug.LogWarning("Videoplayer not assigned");
+               return;
             }
+        else if (!videoPlayer.isPlaying)
+        {
+
             if (clip != null)
             {
                 videoPlayer.clip = clip;
             }
             videoPlayer.Play();
             }
-        else if (videoPlayer.isPaused)
-        {
-            videoPlayer.Play();
-        }
+        
         else
         {
             videoPlayer.Pause();
