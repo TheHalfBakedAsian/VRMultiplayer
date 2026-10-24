@@ -13,7 +13,7 @@ public struct QAresponses : INetworkSerializable, IEquatable<QAresponses>
         AnswerTwo = two;
         AnswerThree = three;
     }
-    public string toString()
+    public override string ToString()
     {
         return AnswerOne +","+ AnswerTwo + "," + AnswerThree;
     }

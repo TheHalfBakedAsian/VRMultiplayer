@@ -9,10 +9,9 @@ public class ShortQA : MonoBehaviour
     [SerializeField] private Slider FieldThree;
     [SerializeField] private Scribe ServerPoint;
     [SerializeField] private Button Submit;
-
-    private string AnswerOne;
-    private string AnswerTwo;
-    private int AnswerThree;
+    private string AnswerOne = "Null";
+    private string AnswerTwo = "Monday";
+    private int AnswerThree = 0;
     void Awake()
     {
         FieldOne.onValueChanged.AddListener(UpdateValueOne);
